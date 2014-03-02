@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-# Clonpi Disks Duplicator code by Z3ro0ne
+# Clonpi Hard Disk Duplicator code by Z3ro0ne
 #Blog : z3ro0ne.blogspot.com
 #Email : Saadousfar59@gmail.com
 #Fb : https://www.facebook.com/Z3ro0ne
