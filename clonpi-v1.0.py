@@ -50,9 +50,9 @@ LCD_D7 = 18
 
 ABORT_EXIT = 3
 IPSHOW = 14
-LEFT = 22
+LEFT = 4
 MENU_SET = 2
-RIGHT = 27
+RIGHT = 17
 
 #read disks list
 f=os.popen("fdisk -l |grep Disk")
@@ -143,9 +143,9 @@ def home():
     lcd_byte(LCD_LINE_2, LCD_CMD)
     lcd_string(line2,1)
     while(1):
-      if ( GPIO.input(RIGHT) == True):
+      if ( GPIO.input(RIGHT) == False):
        home()
-      if ( GPIO.input(LEFT) == True):
+      if ( GPIO.input(LEFT) == False):
        home()
       if ( GPIO.input(MENU_SET) == False):
        menu()
@@ -178,13 +178,13 @@ def menu():
       lcd_byte(LCD_LINE_2, LCD_CMD)
       lcd_string("<    Copy    >",2)
    else:
-    if ( GPIO.input(LEFT) == True):
+    if ( GPIO.input(LEFT) == False):
      off()
     if ( GPIO.input(MENU_SET) == False):
      copy_hdd1_to_hdd2()
     if ( GPIO.input(RIGHT) == False):
      erase()
-    if ( GPIO.input(ABORT_EXIT) == True):
+    if ( GPIO.input(ABORT_EXIT) == False):
      home()
 
 def copy_hdd1_to_hdd2():
@@ -210,13 +210,13 @@ def copy_hdd1_to_hdd2():
     lcd_byte(LCD_LINE_2, LCD_CMD)
     lcd_string(line2,1)
     while(1):
-      if ( GPIO.input(RIGHT) == True):
+      if ( GPIO.input(RIGHT) == False):
        copy_hdd2_to_hdd1()
-      if ( GPIO.input(LEFT) == True):
+      if ( GPIO.input(LEFT) == False):
        copy_hdd1_to_hdd2()
-      if ( GPIO.input(MENU_SET) == True):
+      if ( GPIO.input(MENU_SET) == False):
        copy_cmd_1()
-      if ( GPIO.input(ABORT_EXIT) == True):
+      if ( GPIO.input(ABORT_EXIT) == False):
        menu()
 
 def copy_hdd2_to_hdd1():
@@ -247,11 +247,11 @@ def copy_hdd2_to_hdd1():
     lcd_byte(LCD_LINE_2, LCD_CMD)
     lcd_string(line2,1)
     while(1):
-      if ( GPIO.input(RIGHT) == True):
+      if ( GPIO.input(RIGHT) == False):
        copy_hdd2_to_hdd1()
-      if ( GPIO.input(LEFT) == True):
+      if ( GPIO.input(LEFT) == False):
        copy_hdd2_to_hdd1()
-      if ( GPIO.input(MENU_SET) == True):
+      if ( GPIO.input(MENU_SET) == False):
        copy_cmd_2()
 
 def copy_cmd_1():
@@ -277,11 +277,11 @@ def copy_cmd_1():
     lcd_byte(LCD_LINE_2, LCD_CMD)
     lcd_string(line2,1)
     while(1):
-      if ( GPIO.input(RIGHT) == True):
+      if ( GPIO.input(RIGHT) == False):
        home()
-      if ( GPIO.input(LEFT) == True):
+      if ( GPIO.input(LEFT) == False):
        copy_hdd1_to_hdd2()
-      if ( GPIO.input(MENU_SET) == True):
+      if ( GPIO.input(MENU_SET) == False):
        copy_cmd_1_confirmation()
 
 def copy_cmd_1_confirmation():
@@ -327,9 +327,9 @@ def log():
        lcd_string("!! Operation !!",1)
        lcd_byte(LCD_LINE_2, LCD_CMD)
        lcd_string("!!  Failed   !!",1)
-      if ( GPIO.input(ABORT_EXIT) == True):
+      if ( GPIO.input(ABORT_EXIT) == False):
        home()
-      if ( GPIO.input(MENU_SET) == True):
+      if ( GPIO.input(MENU_SET) == False):
        menu()
 
 def copy_cmd_2():
@@ -355,11 +355,11 @@ def copy_cmd_2():
     lcd_byte(LCD_LINE_2, LCD_CMD)
     lcd_string(line2,1)
     while(1):
-      if ( GPIO.input(RIGHT) == True):
+      if ( GPIO.input(RIGHT) == False):
        home()
-      if ( GPIO.input(LEFT) == True):
+      if ( GPIO.input(LEFT) == False):
        copy_hdd1_to_hdd2()
-      if ( GPIO.input(MENU_SET) == True):
+      if ( GPIO.input(MENU_SET) == False):
        copy_cmd_1_confirmation()
 
 def copy_cmd_2_confirmation():
@@ -405,9 +405,9 @@ def log2():
        lcd_string("!! Operation !!",1)
        lcd_byte(LCD_LINE_2, LCD_CMD)
        lcd_string("!!  Failed   !!",1)
-      if ( GPIO.input(ABORT_EXIT) == True):
+      if ( GPIO.input(ABORT_EXIT) == False):
        home()
-      if ( GPIO.input(MENU_SET) == True):
+      if ( GPIO.input(MENU_SET) == False):
        menu()
 ###############################
 #erase menu                   #
@@ -463,11 +463,11 @@ def quick_erase1():
     lcd_byte(LCD_LINE_2, LCD_CMD)
     lcd_string(line2,1)
     while(1):
-      if ( GPIO.input(RIGHT) == True):
+      if ( GPIO.input(RIGHT) == False):
        home()
-      if ( GPIO.input(LEFT) == True):
+      if ( GPIO.input(LEFT) == False):
        copy_hdd1_to_hdd2()
-      if ( GPIO.input(MENU_SET) == True):
+      if ( GPIO.input(MENU_SET) == False):
        erase_cmd_1_confirmation()
 
 def erase_cmd_1_confirmation():
@@ -513,9 +513,9 @@ def erase_log2():
        lcd_string("!! Operation !!",1)
        lcd_byte(LCD_LINE_2, LCD_CMD)
        lcd_string("!!  Failed   !!",1)
-      if ( GPIO.input(ABORT_EXIT) == True):
+      if ( GPIO.input(ABORT_EXIT) == False):
        home()
-      if ( GPIO.input(MENU_SET) == True):
+      if ( GPIO.input(MENU_SET) == False):
        menu()
 def quick_erase2():
     string1 = "Erase"
@@ -537,11 +537,11 @@ def quick_erase2():
     lcd_byte(LCD_LINE_2, LCD_CMD)
     lcd_string(line2,1)
     while(1):
-      if ( GPIO.input(RIGHT) == True):
+      if ( GPIO.input(RIGHT) == False):
        home()
-      if ( GPIO.input(LEFT) == True):
+      if ( GPIO.input(LEFT) == False):
        copy_hdd1_to_hdd2()
-      if ( GPIO.input(MENU_SET) == True):
+      if ( GPIO.input(MENU_SET) == False):
        erase_cmd_1_confirmation()
 
 def erase_cmd_2_confirmation():
@@ -587,9 +587,9 @@ def erase_log3():
        lcd_string("!! Operation !!",1)
        lcd_byte(LCD_LINE_2, LCD_CMD)
        lcd_string("!!  Failed   !!",1)
-      if ( GPIO.input(ABORT_EXIT) == True):
+      if ( GPIO.input(ABORT_EXIT) == False):
        home()
-      if ( GPIO.input(MENU_SET) == True):
+      if ( GPIO.input(MENU_SET) == False):
        menu()
 
 def utility():
