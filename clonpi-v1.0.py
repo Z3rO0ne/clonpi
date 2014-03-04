@@ -87,8 +87,6 @@ def main():
   lcd_byte(LCD_LINE_2, LCD_CMD)
   lcd_string("Duplicator",2)
   time.sleep(2)
-  #home()
-  #ip()
   disks_list()
 def disks_list():
     #read disks list
@@ -100,9 +98,8 @@ def disks_list():
     hdd2 = f.readlines()
     hdd2 = hdd2[-4]
     HDD2 = hdd2[6:13]    #home()
-    test()
-def test():
-    f=os.system("df /"+(HDD1)+"1"  )
+    home()
+
 
 
 def home():
