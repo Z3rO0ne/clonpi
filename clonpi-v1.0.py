@@ -1,28 +1,14 @@
 #!/usr/bin/python
 
-# Clonpi Hdd Duplicator code by Z3ro0ne
+# Clonpi Hdd Duplicator v1.0  by Z3ro0ne 
+#this is open source code and 
 #Blog : z3ro0ne.blogspot.com
 #Email : Saadousfar59@gmail.com
 #Fb : https://www.facebook.com/Z3ro0ne
 # Enjoy ..
 #
-# The wiring for the LCD is as follows:
-# 1 : GND
-# 2 : 5V
-# 3 : Contrast (0-5V)*
-# 4 : RS (Register Select)
-# 5 : R/W (Read Write)       - GROUND THIS PIN! We do not want the LCD to send anything to the Pi @ 5v
-# 6 : Enable or Strobe
-# 7 : Data Bit 0             - NOT USED
-# 8 : Data Bit 1             - NOT USED
-# 9 : Data Bit 2             - NOT USED
-# 10: Data Bit 3             - NOT USED
-# 11: Data Bit 4
-# 12: Data Bit 5
-# 13: Data Bit 6
-# 14: Data Bit 7
-# 15: LCD Backlight +5V
-# 16: LCD Backlight GND
+# for wiring check 
+
 
 
 #import
@@ -34,8 +20,7 @@ import socket
 import fcntl
 import struct
 import datetime
-import smtplib
-from email.mime.text import MIMEText
+
 
 # Define GPIO to LCD mapping
 LCD_RS = 7
