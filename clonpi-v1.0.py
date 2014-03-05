@@ -86,8 +86,7 @@ def main():
   lcd_byte(LCD_LINE_2, LCD_CMD)
   lcd_string("Duplicator",2)
   time.sleep(2)
-  #disks_list()
-  hdd1()
+  disks_list()
 def disks_list():
     #read disks list
     f=os.popen("fdisk -l |grep Disk")
