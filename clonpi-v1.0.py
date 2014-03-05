@@ -798,6 +798,8 @@ def hdd2():
     else:
         if ( GPIO.input(MENU_SET) == False):
          systeminfo()
+        if ( GPIO.input(ABORT_EXIT) == False):
+          systeminfo()
 def ip():
   timelastchecked = 0
   time.sleep(0.5)
