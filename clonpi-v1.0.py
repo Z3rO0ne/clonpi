@@ -686,11 +686,13 @@ def hddsInfo():
       lcd_string("< Show hdd info >",2)
    else:
     if ( GPIO.input(LEFT) == False):
-     erase()
+     systeminfo()
     if ( GPIO.input(MENU_SET) == False):
      hd1()
     if ( GPIO.input(RIGHT) == False):
-     menu()
+     systeminfo()
+    if ( GPIO.input(ABORT_EXIT) == False):
+     utility()
 def hd1():
   timelastchecked = 0
   time.sleep(0.5)
@@ -717,7 +719,7 @@ def hd1():
       lcd_string("< Hdd #1 >",2)
    else:
     if ( GPIO.input(LEFT) == False):
-     erase()
+     hd1()
     if ( GPIO.input(MENU_SET) == False):
      hdd1()
     if ( GPIO.input(RIGHT) == False):
