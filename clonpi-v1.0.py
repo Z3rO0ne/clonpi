@@ -779,14 +779,14 @@ def hdd1():
          systeminfo()
 def hdd2():
     while(1):
-     string1 = "hd1:"
+     string1 = "hd2:"
      string2 = "Sn:"
-     f=os.popen("hdparm -I /dev/sda1 |grep Model")
+     f=os.popen("hdparm -I /dev/sdb1 |grep Model")
      size1 = f.readlines()
      size1 = size1[0]
      size1 = size1[21:37]
      line1 = string1 + size1
-     f=os.popen("hdparm -I /dev/sda1 |grep Serial")
+     f=os.popen("hdparm -I /dev/sdb1 |grep Serial")
      size2 = f.readlines()
      size2 = size2[0]
      size2 = size2[21:37]
