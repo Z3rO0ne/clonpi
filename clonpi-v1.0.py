@@ -202,12 +202,6 @@ def copy_hdd1_to_hdd2():
        menu()
 
 def copy_hdd2_to_hdd1():
-   #if time.time() >= timelastchecked:
-    #timelastchecked = time.time()+3
-    #mystring = ""
-    #size1 = ""
-    #mytemp = ""
-    #pretemp = "0x1 ["
     hd1 = "Hdd #2:"
     hd2 = "To Hdd #1:"
     f=os.popen("fdisk -l |grep Disk ")
