@@ -1,13 +1,12 @@
 #!/usr/bin/python
 
-# Clonpi Hdd Duplicator v1.0  by Z3ro0ne 
-#this is open source code and 
+# Clonpi Hdd Duplicator v1.0 Open source code by Z3ro0ne
 #Blog : z3ro0ne.blogspot.com
 #Email : Saadousfar59@gmail.com
 #Fb : https://www.facebook.com/Z3ro0ne
 # Enjoy ..
 #
-# for wiring check 
+# for wiring check plz https://github.com/Z3rO0ne/clonpi/tree/master/wiring
 
 
 
@@ -596,10 +595,80 @@ def utility():
     if ( GPIO.input(LEFT) == False):
      erase()
     if ( GPIO.input(MENU_SET) == False):
-     quick_erase1()
+     systeminfo()
     if ( GPIO.input(RIGHT) == False):
      menu()
 
+def systeminfo():
+  timelastchecked = 0
+  time.sleep(0.5)
+  while(1):
+   if time.time() >= timelastchecked:
+    timelastchecked = time.time()+3
+    mystring = ""
+    mytime = ""
+    mytemp = ""
+    pretemp = "0x1 ["
+    posttemp = "] "
+    f=os.popen("date")
+    for i in f.readlines():
+     mytime += i
+     mytime = mytime[11:-13]
+     f=os.popen("/opt/vc/bin/vcgencmd measure_temp")
+     for i in f.readlines():
+      mytemp += i
+      mytemp = mytemp[5:-3]
+      mystring = pretemp + mytemp + posttemp + mytime
+      lcd_byte(LCD_LINE_1, LCD_CMD)
+      lcd_string(mystring,1)
+      preIP = "IP "
+      address = get_ip_address('eth0')
+      address = preIP + address
+      lcd_byte(LCD_LINE_2, LCD_CMD)
+      lcd_string(address,1)
+      lcd_string("< Show Ip address >",2)
+   else:
+    if ( GPIO.input(LEFT) == False):
+     erase()
+    if ( GPIO.input(MENU_SET) == False):
+     showIp()
+    if ( GPIO.input(RIGHT) == False):
+     menu()
+def showIp():
+  timelastchecked = 0
+  time.sleep(0.5)
+  while(1):
+   if time.time() >= timelastchecked:
+    timelastchecked = time.time()+3
+    mystring = ""
+    mytime = ""
+    mytemp = ""
+    pretemp = "0x1 ["
+    posttemp = "] "
+    f=os.popen("date")
+    for i in f.readlines():
+     mytime += i
+     mytime = mytime[11:-13]
+     f=os.popen("/opt/vc/bin/vcgencmd measure_temp")
+     for i in f.readlines():
+      mytemp += i
+      mytemp = mytemp[5:-3]
+      mystring = pretemp + mytemp + posttemp + mytime
+      lcd_byte(LCD_LINE_1, LCD_CMD)
+      lcd_string(mystring,1)
+      preIP = "IP "
+      address = get_ip_address('eth0')
+      address = preIP + address
+      lcd_byte(LCD_LINE_2, LCD_CMD)
+      lcd_string(address,1)
+
+   else:
+    if ( GPIO.input(LEFT) == False):
+     erase()
+    if ( GPIO.input(MENU_SET) == False):
+     systeminfo()
+    if ( GPIO.input(RIGHT) == False):
+     menu()
 def ip():
   timelastchecked = 0
   time.sleep(0.5)
@@ -627,8 +696,14 @@ def ip():
       address = preIP + address
       lcd_byte(LCD_LINE_2, LCD_CMD)
       lcd_string(address,1)
-      time.sleep(4.5)
-      home()
+  else:
+
+   if ( GPIO.input(LEFT) == False):
+          erase()
+   if ( GPIO.input(MENU_SET) == False):
+          systeminfo()
+   if ( GPIO.input(RIGHT) == False):
+         dd()
 
 def get_ip_address(ifname):
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
