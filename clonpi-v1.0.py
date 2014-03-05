@@ -86,7 +86,8 @@ def main():
   lcd_byte(LCD_LINE_2, LCD_CMD)
   lcd_string("Duplicator",2)
   time.sleep(2)
-  disks_list()
+  #disks_list()
+  hdd1()
 def disks_list():
     #read disks list
     f=os.popen("fdisk -l |grep Disk")
@@ -221,13 +222,7 @@ def copy_hdd2_to_hdd1():
     lcd_string(line1,1)
     lcd_byte(LCD_LINE_2, LCD_CMD)
     lcd_string(line2,1)
-    while(1):
-      if ( GPIO.input(RIGHT) == False):
-       copy_hdd2_to_hdd1()
-      if ( GPIO.input(LEFT) == False):
-       copy_hdd2_to_hdd1()
-      if ( GPIO.input(MENU_SET) == False):
-       copy_cmd_2()
+
 
 def copy_cmd_1():
     string1 = "Hdd #1:"
@@ -697,31 +692,30 @@ def hdd1Info():
     if ( GPIO.input(RIGHT) == False):
      menu()
 def hdd1():
-    string1 = "hd1:"
-    string2 = "Sn:"
-
-    f=os.popen("hdparm -I /dev/sda1 |grep Model")
-    size1 = f.readlines()
-    size1 = size1[-4]
-    size1 = size1[15:22]
-    line1 = string1 + size1
-    f=os.popen("hdparm -I /dev/sda1 |grep Serial")
-    size2 = f.readlines()
-    size2 = size2[-1]
-    size2 = size2[15:22]
-    line2 = string2 + size2
-    print(size2)
-    lcd_byte(LCD_LINE_1, LCD_CMD)
-    lcd_string(line1,1)
-    lcd_byte(LCD_LINE_2, LCD_CMD)
-    lcd_string(line2,1)
     while(1):
-      if ( GPIO.input(RIGHT) == False):
-       home()
-      if ( GPIO.input(LEFT) == False):
-       copy_hdd1_to_hdd2()
-      if ( GPIO.input(MENU_SET) == False):
-       erase_cmd_1_confirmation()
+     string1 = "hd1:"
+     string2 = "Sn:"
+     f=os.popen("hdparm -I /dev/sda1 |grep Model")
+     size1 = f.readlines()
+     size1 = size1[0]
+     size1 = size1[21:37]
+     line1 = string1 + size1
+     f=os.popen("hdparm -I /dev/sda1 |grep Serial")
+     size2 = f.readlines()
+     size2 = size2[0]
+     size2 = size2[21:37]
+     line2 = string2 + size2
+     lcd_byte(LCD_LINE_1, LCD_CMD)
+     lcd_string(line1,1)
+     lcd_byte(LCD_LINE_2, LCD_CMD)
+     lcd_string(line2,1)
+    else:
+        if ( GPIO.input(RIGHT) == False):
+          home()
+        if ( GPIO.input(LEFT) == False):
+          copy_hdd1_to_hdd2()
+        if ( GPIO.input(MENU_SET) == False):
+         erase_cmd_1_confirmation()
 def ip():
   timelastchecked = 0
   time.sleep(0.5)
