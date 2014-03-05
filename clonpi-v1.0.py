@@ -660,7 +660,7 @@ def showIp():
     if ( GPIO.input(RIGHT) == False):
      menu()
 
-def hdd1Info():
+def hddsInfo():
   timelastchecked = 0
   time.sleep(0.5)
   while(1):
@@ -688,9 +688,72 @@ def hdd1Info():
     if ( GPIO.input(LEFT) == False):
      erase()
     if ( GPIO.input(MENU_SET) == False):
-     systeminfo()
+     hd1()
     if ( GPIO.input(RIGHT) == False):
      menu()
+def hd1():
+  timelastchecked = 0
+  time.sleep(0.5)
+  while(1):
+   if time.time() >= timelastchecked:
+    timelastchecked = time.time()+3
+    mystring = ""
+    mytime = ""
+    mytemp = ""
+    pretemp = "0x1 ["
+    posttemp = "] "
+    f=os.popen("date")
+    for i in f.readlines():
+     mytime += i
+     mytime = mytime[11:-13]
+     f=os.popen("/opt/vc/bin/vcgencmd measure_temp")
+     for i in f.readlines():
+      mytemp += i
+      mytemp = mytemp[5:-3]
+      mystring = pretemp + mytemp + posttemp + mytime
+      lcd_byte(LCD_LINE_1, LCD_CMD)
+      lcd_string(mystring,1)
+      lcd_byte(LCD_LINE_2, LCD_CMD)
+      lcd_string("< Hdd #1 >",2)
+   else:
+    if ( GPIO.input(LEFT) == False):
+     erase()
+    if ( GPIO.input(MENU_SET) == False):
+     hdd1()
+    if ( GPIO.input(RIGHT) == False):
+     hd2()
+
+def hd2():
+  timelastchecked = 0
+  time.sleep(0.5)
+  while(1):
+   if time.time() >= timelastchecked:
+    timelastchecked = time.time()+3
+    mystring = ""
+    mytime = ""
+    mytemp = ""
+    pretemp = "0x1 ["
+    posttemp = "] "
+    f=os.popen("date")
+    for i in f.readlines():
+     mytime += i
+     mytime = mytime[11:-13]
+     f=os.popen("/opt/vc/bin/vcgencmd measure_temp")
+     for i in f.readlines():
+      mytemp += i
+      mytemp = mytemp[5:-3]
+      mystring = pretemp + mytemp + posttemp + mytime
+      lcd_byte(LCD_LINE_1, LCD_CMD)
+      lcd_string(mystring,1)
+      lcd_byte(LCD_LINE_2, LCD_CMD)
+      lcd_string("< Hdd #2 >",2)
+   else:
+    if ( GPIO.input(LEFT) == False):
+     hd1()
+    if ( GPIO.input(MENU_SET) == False):
+     hdd2()
+    if ( GPIO.input(RIGHT) == False):
+     hd2()
 def hdd1():
     while(1):
      string1 = "hd1:"
@@ -715,7 +778,32 @@ def hdd1():
         if ( GPIO.input(LEFT) == False):
           copy_hdd1_to_hdd2()
         if ( GPIO.input(MENU_SET) == False):
-         erase_cmd_1_confirmation()
+         systeminfo()
+def hdd2():
+    while(1):
+     string1 = "hd1:"
+     string2 = "Sn:"
+     f=os.popen("hdparm -I /dev/sda1 |grep Model")
+     size1 = f.readlines()
+     size1 = size1[0]
+     size1 = size1[21:37]
+     line1 = string1 + size1
+     f=os.popen("hdparm -I /dev/sda1 |grep Serial")
+     size2 = f.readlines()
+     size2 = size2[0]
+     size2 = size2[21:37]
+     line2 = string2 + size2
+     lcd_byte(LCD_LINE_1, LCD_CMD)
+     lcd_string(line1,1)
+     lcd_byte(LCD_LINE_2, LCD_CMD)
+     lcd_string(line2,1)
+    else:
+        if ( GPIO.input(RIGHT) == False):
+          home()
+        if ( GPIO.input(LEFT) == False):
+          copy_hdd1_to_hdd2()
+        if ( GPIO.input(MENU_SET) == False):
+         systeminfo()
 def ip():
   timelastchecked = 0
   time.sleep(0.5)
