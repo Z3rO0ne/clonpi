@@ -773,10 +773,6 @@ def hdd1():
      lcd_byte(LCD_LINE_2, LCD_CMD)
      lcd_string(line2,1)
     else:
-        if ( GPIO.input(RIGHT) == False):
-          home()
-        if ( GPIO.input(LEFT) == False):
-          copy_hdd1_to_hdd2()
         if ( GPIO.input(MENU_SET) == False):
          systeminfo()
 def hdd2():
@@ -798,10 +794,6 @@ def hdd2():
      lcd_byte(LCD_LINE_2, LCD_CMD)
      lcd_string(line2,1)
     else:
-        if ( GPIO.input(RIGHT) == False):
-          home()
-        if ( GPIO.input(LEFT) == False):
-          copy_hdd1_to_hdd2()
         if ( GPIO.input(MENU_SET) == False):
          systeminfo()
 def ip():
