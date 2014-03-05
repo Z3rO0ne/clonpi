@@ -621,11 +621,6 @@ def systeminfo():
       mystring = pretemp + mytemp + posttemp + mytime
       lcd_byte(LCD_LINE_1, LCD_CMD)
       lcd_string(mystring,1)
-      preIP = "IP "
-      address = get_ip_address('eth0')
-      address = preIP + address
-      lcd_byte(LCD_LINE_2, LCD_CMD)
-      lcd_string(address,1)
       lcd_string("< Show Ip address >",2)
    else:
     if ( GPIO.input(LEFT) == False):
@@ -669,6 +664,64 @@ def showIp():
      systeminfo()
     if ( GPIO.input(RIGHT) == False):
      menu()
+
+def hdd1Info():
+  timelastchecked = 0
+  time.sleep(0.5)
+  while(1):
+   if time.time() >= timelastchecked:
+    timelastchecked = time.time()+3
+    mystring = ""
+    mytime = ""
+    mytemp = ""
+    pretemp = "0x1 ["
+    posttemp = "] "
+    f=os.popen("date")
+    for i in f.readlines():
+     mytime += i
+     mytime = mytime[11:-13]
+     f=os.popen("/opt/vc/bin/vcgencmd measure_temp")
+     for i in f.readlines():
+      mytemp += i
+      mytemp = mytemp[5:-3]
+      mystring = pretemp + mytemp + posttemp + mytime
+      lcd_byte(LCD_LINE_1, LCD_CMD)
+      lcd_string(mystring,1)
+      lcd_byte(LCD_LINE_2, LCD_CMD)
+      lcd_string("< Show hdd info >",2)
+   else:
+    if ( GPIO.input(LEFT) == False):
+     erase()
+    if ( GPIO.input(MENU_SET) == False):
+     systeminfo()
+    if ( GPIO.input(RIGHT) == False):
+     menu()
+def hdd1():
+    string1 = "hd1:"
+    string2 = "Sn:"
+
+    f=os.popen("hdparm -I /dev/sda1 |grep Model")
+    size1 = f.readlines()
+    size1 = size1[-4]
+    size1 = size1[15:22]
+    line1 = string1 + size1
+    f=os.popen("hdparm -I /dev/sda1 |grep Serial")
+    size2 = f.readlines()
+    size2 = size2[-1]
+    size2 = size2[15:22]
+    line2 = string2 + size2
+    print(size2)
+    lcd_byte(LCD_LINE_1, LCD_CMD)
+    lcd_string(line1,1)
+    lcd_byte(LCD_LINE_2, LCD_CMD)
+    lcd_string(line2,1)
+    while(1):
+      if ( GPIO.input(RIGHT) == False):
+       home()
+      if ( GPIO.input(LEFT) == False):
+       copy_hdd1_to_hdd2()
+      if ( GPIO.input(MENU_SET) == False):
+       erase_cmd_1_confirmation()
 def ip():
   timelastchecked = 0
   time.sleep(0.5)
