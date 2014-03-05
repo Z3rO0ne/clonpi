@@ -827,12 +827,11 @@ def ip():
       lcd_string(address,1)
   else:
 
-   if ( GPIO.input(LEFT) == False):
-          erase()
    if ( GPIO.input(MENU_SET) == False):
           systeminfo()
-   if ( GPIO.input(RIGHT) == False):
-         dd()
+   if ( GPIO.input(ABORT_EXIT) == False):
+          systeminfo()
+
 
 def get_ip_address(ifname):
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
